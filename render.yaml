@@ -1,0 +1,36 @@
+databases:
+  - name: daxx-mongodb
+    databaseName: daxxmusic
+    user: admin
+
+services:
+  - type: web
+    name: daxx-music-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m DAXXMUSIC
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: STRING_SESSION
+        sync: false
+      - key: LOGGER_ID
+        sync: false
+      - key: MONGO_DB_URI
+        fromDatabase:
+          name: daxx-mongodb
+          property: connectionString
+      - key: BOT_NAME
+        value: DAXX Music
+      - key: SPOTIFY_CLIENT_ID
+        value: ""
+      - key: SPOTIFY_CLIENT_SECRET
+        value: ""
