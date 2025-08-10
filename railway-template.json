@@ -1,0 +1,82 @@
+{
+  "name": "DAXX Music Bot",
+  "description": "Professional Telegram Music Bot with Multi-Platform Support",
+  "services": [
+    {
+      "name": "DAXX Music",
+      "icon": "🎵",
+      "source": {
+        "type": "github",
+        "repo": "DAXXTEAM/DAXXMUSIC"
+      },
+      "deploy": {
+        "startCommand": "bash start",
+        "healthcheckPath": "/",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "envVars": {
+        "API_ID": {
+          "description": "Get from https://my.telegram.org",
+          "required": true,
+          "default": ""
+        },
+        "API_HASH": {
+          "description": "Get from https://my.telegram.org",
+          "required": true,
+          "default": ""
+        },
+        "BOT_TOKEN": {
+          "description": "Bot token from @BotFather",
+          "required": true,
+          "default": ""
+        },
+        "MONGO_DB_URI": {
+          "description": "MongoDB URI from cloud.mongodb.com",
+          "required": true,
+          "default": ""
+        },
+        "OWNER_ID": {
+          "description": "Your Telegram user ID",
+          "required": true,
+          "default": ""
+        },
+        "STRING_SESSION": {
+          "description": "Pyrogram session string (generate using script)",
+          "required": true,
+          "default": ""
+        },
+        "LOGGER_ID": {
+          "description": "Telegram group ID for logs (starts with -)",
+          "required": true,
+          "default": ""
+        },
+        "BOT_NAME": {
+          "description": "Your bot's display name",
+          "required": false,
+          "default": "DAXX Music"
+        },
+        "SUPPORT_CHANNEL": {
+          "description": "Your support channel link",
+          "required": false,
+          "default": "https://t.me/DAXXMUSIC_UPDATES"
+        },
+        "SUPPORT_CHAT": {
+          "description": "Your support group link",
+          "required": false,
+          "default": "https://t.me/DAXXMUSIC_SUPPORT"
+        },
+        "SPOTIFY_CLIENT_ID": {
+          "description": "Spotify client ID for integration",
+          "required": false,
+          "default": ""
+        },
+        "SPOTIFY_CLIENT_SECRET": {
+          "description": "Spotify client secret",
+          "required": false,
+          "default": ""
+        }
+      }
+    }
+  ]
+}

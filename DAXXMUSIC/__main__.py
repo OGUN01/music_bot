@@ -1,5 +1,6 @@
 import asyncio
 import importlib
+import sys
 
 from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
@@ -10,10 +11,26 @@ from DAXXMUSIC.core.call import DAXX
 from DAXXMUSIC.misc import sudo
 from DAXXMUSIC.plugins import ALL_MODULES
 from DAXXMUSIC.utils.database import get_banned_users, get_gbanned
+from DAXXMUSIC.utils.health import validate_config
 from config import BANNED_USERS
 
 
 async def init():
+    # Validate configuration first
+    try:
+        validation = await validate_config()
+        if not validation["valid"]:
+            LOGGER(__name__).error("Configuration validation failed:")
+            for error in validation["errors"]:
+                LOGGER(__name__).error(f"  - {error}")
+            sys.exit(1)
+        
+        if validation["warnings"]:
+            for warning in validation["warnings"]:
+                LOGGER(__name__).warning(f"  - {warning}")
+    except Exception as e:
+        LOGGER(__name__).error(f"Failed to validate configuration: {e}")
+    
     if (
         not config.STRING1
         and not config.STRING2
@@ -22,7 +39,7 @@ async def init():
         and not config.STRING5
     ):
         LOGGER(__name__).error("𝐒𝐭𝐫𝐢𝐧𝐠 𝐒𝐞𝐬𝐬𝐢𝐨𝐧 𝐍𝐨𝐭 𝐅𝐢𝐥𝐥𝐞𝐝, 𝐏𝐥𝐞𝐚𝐬𝐞 𝐅𝐢𝐥𝐥 𝐀 𝐏𝐲𝐫𝐨𝐠𝐫𝐚𝐦 𝐒𝐞𝐬𝐬𝐢𝐨𝐧")
-        exit()
+        sys.exit(1)
     await sudo()
     try:
         users = await get_gbanned()
@@ -42,10 +59,9 @@ async def init():
     try:
         await DAXX.stream_call("https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4")
     except NoActiveGroupCall:
-        LOGGER("DAXXMUSIC").error(
-            "𝗣𝗹𝗭 𝗦𝗧𝗔𝗥𝗧 𝗬𝗢𝗨𝗥 𝗟𝗢𝗚 𝗚𝗥𝗢𝗨𝗣 𝗩𝗢𝗜𝗖𝗘𝗖𝗛𝗔𝗧\𝗖𝗛𝗔𝗡𝗡𝗘𝗟\n\n𝗗𝗔𝗫𝗫 𝗕𝗢𝗧 𝗦𝗧𝗢𝗣........"
+        LOGGER("DAXXMUSIC").warning(
+            "Log group/channel has no active voice chat. Continuing without stream test."
         )
-        exit()
     except:
         pass
     await DAXX.decorators()
