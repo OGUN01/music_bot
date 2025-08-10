@@ -13,7 +13,9 @@
 
 ## 🚀 Deploy to Railway (Recommended)
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/daxxmusic)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/music-bot)
+
+**✨ NEW: Built-in MongoDB Database! No external setup needed!**
 
 ## ✨ Features
 
@@ -54,12 +56,10 @@ Before deploying, you need:
    - Create a bot via [@BotFather](https://t.me/BotFather)
    - Get your bot token
 
-3. **MongoDB Database**
-   - Create free account at [MongoDB Atlas](https://cloud.mongodb.com)
-   - Create a cluster and get connection URI
-
-4. **Pyrogram Session String**
+3. **Pyrogram Session String**
    - Run the session generator script (see below)
+
+**✅ MongoDB Database:** Automatically provided by Railway! No external setup needed.
 
 ## 🚂 Railway Deployment Guide
 
@@ -101,58 +101,45 @@ LOGGER_ID=your_logger_group_id
 
 ### Step 4: Deploy to Railway
 
-#### Method 1: Using Railway CLI
+#### Method 1: One-Click Deploy (Easiest)
 
-1. Install Railway CLI:
-```bash
-npm install -g @railway/cli
-```
+1. Click the "Deploy on Railway" button above
+2. Connect your GitHub account
+3. Select your forked repository
+4. Railway will automatically:
+   - Create the bot service
+   - Set up MongoDB database
+   - Configure internal networking
+5. Add your environment variables (see below)
+6. Deploy!
 
-2. Login to Railway:
-```bash
-railway login
-```
-
-3. Initialize project:
-```bash
-railway init
-```
-
-4. Link to Railway project:
-```bash
-railway link
-```
-
-5. Deploy:
-```bash
-railway up
-```
-
-#### Method 2: Using GitHub Integration
+#### Method 2: Manual Deploy
 
 1. Go to [Railway Dashboard](https://railway.app/dashboard)
 2. Click "New Project" → "Deploy from GitHub repo"
 3. Select your forked repository
-4. Railway will auto-detect the Dockerfile
-5. Add environment variables in Railway dashboard
-6. Click "Deploy"
+4. Add MongoDB service:
+   - Click "Add Service" → "Database" → "MongoDB"
+   - Railway will automatically configure the connection
+5. Add environment variables in bot service
+6. Deploy!
 
-### Step 5: Configure Environment in Railway
+### Step 5: Configure Environment Variables
 
-1. Go to your project in Railway Dashboard
-2. Click on "Variables" tab
-3. Add all required environment variables:
-   - `API_ID`
-   - `API_HASH`
-   - `BOT_TOKEN`
-   - `MONGO_DB_URI`
-   - `OWNER_ID`
-   - `STRING_SESSION`
-   - `LOGGER_ID`
+**Required Variables:**
+- `API_ID` - From my.telegram.org
+- `API_HASH` - From my.telegram.org  
+- `BOT_TOKEN` - From @BotFather
+- `OWNER_ID` - Your Telegram user ID
+- `STRING_SESSION` - Generated session string
+- `LOGGER_ID` - Telegram group ID for logs
 
-4. Optional variables for enhanced features:
-   - `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` for Spotify
-   - `SUPPORT_CHANNEL` and `SUPPORT_CHAT` for support links
+**✅ MONGO_DB_URI:** Automatically configured by Railway MongoDB service!
+
+**Optional Variables:**
+- `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` for Spotify integration
+- `BOT_NAME` - Your bot's display name
+- `SUPPORT_CHANNEL` and `SUPPORT_CHAT` for support links
 
 ### Step 6: Monitor Deployment
 

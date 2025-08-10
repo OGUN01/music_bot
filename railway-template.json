@@ -1,13 +1,13 @@
 {
-  "name": "DAXX Music Bot",
-  "description": "Professional Telegram Music Bot with Multi-Platform Support",
+  "name": "DAXX Music Bot with MongoDB",
+  "description": "Professional Telegram Music Bot with Built-in MongoDB Database",
   "services": [
     {
-      "name": "DAXX Music",
+      "name": "daxx-music-bot",
       "icon": "🎵",
       "source": {
         "type": "github",
-        "repo": "DAXXTEAM/DAXXMUSIC"
+        "repo": "OGUN01/music_bot"
       },
       "deploy": {
         "startCommand": "bash start",
@@ -31,11 +31,6 @@
           "required": true,
           "default": ""
         },
-        "MONGO_DB_URI": {
-          "description": "MongoDB URI from cloud.mongodb.com",
-          "required": true,
-          "default": ""
-        },
         "OWNER_ID": {
           "description": "Your Telegram user ID",
           "required": true,
@@ -51,31 +46,39 @@
           "required": true,
           "default": ""
         },
+        "MONGO_DB_URI": {
+          "description": "Auto-configured by Railway MongoDB service",
+          "required": false,
+          "default": "mongodb://admin:password123@mongodb:27017/daxxmusic?authSource=admin"
+        },
         "BOT_NAME": {
           "description": "Your bot's display name",
           "required": false,
           "default": "DAXX Music"
         },
-        "SUPPORT_CHANNEL": {
-          "description": "Your support channel link",
-          "required": false,
-          "default": "https://t.me/DAXXMUSIC_UPDATES"
-        },
-        "SUPPORT_CHAT": {
-          "description": "Your support group link",
-          "required": false,
-          "default": "https://t.me/DAXXMUSIC_SUPPORT"
-        },
         "SPOTIFY_CLIENT_ID": {
-          "description": "Spotify client ID for integration",
+          "description": "Spotify client ID for integration (optional)",
           "required": false,
           "default": ""
         },
         "SPOTIFY_CLIENT_SECRET": {
-          "description": "Spotify client secret",
+          "description": "Spotify client secret (optional)",
           "required": false,
           "default": ""
         }
+      }
+    },
+    {
+      "name": "mongodb",
+      "icon": "🍃",
+      "source": {
+        "type": "image",
+        "image": "mongo:7"
+      },
+      "variables": {
+        "MONGO_INITDB_ROOT_USERNAME": "admin",
+        "MONGO_INITDB_ROOT_PASSWORD": "password123",
+        "MONGO_INITDB_DATABASE": "daxxmusic"
       }
     }
   ]
