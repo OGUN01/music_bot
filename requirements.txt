@@ -2,16 +2,11 @@ aiofiles
 aiohttp
 apscheduler
 asyncio
-bard
 beautifulsoup4
-bing_image_downloader
 bs4
 telegraph
 wget
 unidecode
-cloudscraper
-curl-cffi
-deepai
 dnspython
 emojis
 Faker
@@ -33,7 +28,6 @@ lexica-api
 motor
 nekosbest
 numpy
-openai==0.28.0
 opencv-python
 pickledb
 pillow==10.3.0
