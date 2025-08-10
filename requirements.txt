@@ -57,7 +57,7 @@ stripe==10.7.0
 mysql-connector-python==9.0.0
 telebot==0.0.5
 youtube_dl==2021.12.17
-python-telegram-bot==21.1.1
+python-telegram-bot==22.3
 pyyaml==6.0.1
 MukeshAPI
 youtube-search
